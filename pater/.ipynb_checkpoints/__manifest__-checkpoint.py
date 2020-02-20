@@ -26,5 +26,5 @@
        
     ],
   
-    
+      "installable": True,
 }

@@ -1,6 +1,6 @@
 <odoo>
   <data>
-    <!-- explicit list view definition -->
+    
 
     <record model="ir.ui.view" id="pater.list">
       <field name="name">pater list</field>
@@ -14,7 +14,7 @@
       </field>
     </record>
 
-    <!-- actions opening views on models -->
+   
 
     <record model="ir.actions.act_window" id="pater.action_window">
       <field name="name">pater window</field>
@@ -23,7 +23,7 @@
     </record>
 
 
-    <!-- server action to the one above -->
+   
 
     <record model="ir.actions.server" id="pater.action_server">
       <field name="name">pater server</field>
@@ -39,16 +39,16 @@
     </record>
 
 
-    <!-- Top menu item -->
+   
 
     <menuitem name="pater" id="pater.menu_root"/>
 
-    <!-- menu categories -->
+   
 
     <menuitem name="Menu 1" id="pater.menu_1" parent="pater.menu_root"/>
     <menuitem name="Menu 2" id="pater.menu_2" parent="pater.menu_root"/>
 
-    <!-- actions -->
+   
 
     <menuitem name="List" id="pater.menu_1_list" parent="pater.menu_1"
               action="pater.action_window"/>
