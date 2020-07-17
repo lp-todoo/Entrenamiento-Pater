@@ -50,7 +50,7 @@ class ResUsers(models.Model):
             'office_365_expiration'
         ])
 
-    @api.multi
+    
     def button_office_365_authenticate(self):
         self.ensure_one()
 
@@ -70,13 +70,13 @@ class ResUsers(models.Model):
             'url': url
         }
 
-    @api.multi
+    
     def button_office_365_test(self):
         self.ensure_one()
         res = self.office_365_get('/me/calendarview?StartDateTime=2017-01-01T00:00:00&EndDateTime=2020-01-01T00:00:00')
         return res
 
-    @api.multi
+    
     def _office_365_get_session(self, scope=None):
         self.ensure_one()
         config = self.env['ir.config_parameter'].sudo()
@@ -121,7 +121,7 @@ class ResUsers(models.Model):
             client_secret=client_secret
         )
 
-    @api.multi
+    
     def office_365_persist_token(self, token):
         self.ensure_one()
 
@@ -134,7 +134,7 @@ class ResUsers(models.Model):
         })
         return token
 
-    @api.multi
+    
     def office_365_do_refresh_token(self):
         self.ensure_one()
 
@@ -156,7 +156,7 @@ class ResUsers(models.Model):
             return self.office_365_persist_token(token)
         return False
 
-    @api.multi
+    
     def office_365_request(self, method, url, data=None, headers=None):
         self.ensure_one()
 
@@ -188,18 +188,18 @@ class ResUsers(models.Model):
             raise Office365Error(status, error_code, error['error']['message'])
         return response
 
-    @api.multi
+    
     def office_365_post(self, url, headers=None, data=None):
         return self.office_365_request('post', url, data, headers)
 
-    @api.multi
+    
     def office_365_get(self, url, headers=None):
         return self.office_365_request('get', url, headers=headers)
 
-    @api.multi
+    
     def office_365_patch(self, url, headers=None, data=None):
         return self.office_365_request('patch', url, data, headers)
 
-    @api.multi
+    
     def office_365_delete(self, url, headers=None, data=None):
         return self.office_365_request('delete', url, data, headers)

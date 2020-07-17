@@ -146,7 +146,7 @@ class CalendarEvent(models.Model):
             data=json.dumps(self._office_365_from_event(self))
         )
 
-    @api.multi
+    
     def office_365_push(self):
         for record in self:
             if not record.office_365_id:
@@ -203,7 +203,7 @@ class CalendarEvent(models.Model):
         ])
         to_delete.unlink()
 
-    @api.multi
+    
     def office_365_open(self):
         self.ensure_one()
         return {
@@ -221,7 +221,7 @@ class CalendarEvent(models.Model):
             records.office_365_push()
         return records
 
-    @api.multi
+    
     def write(self, vals):
         res = super(CalendarEvent, self).write(vals)
         user = self.env.context.get('user', self.env.user)
@@ -233,7 +233,7 @@ class CalendarEvent(models.Model):
                 event.office_365_push()
         return res
 
-    @api.multi
+    
     def unlink(self):
         user = self.env.context.get('user', self.env.user)
         for event in self:
