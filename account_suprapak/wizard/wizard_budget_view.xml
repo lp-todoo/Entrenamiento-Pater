@@ -1,0 +1,49 @@
+<odoo>
+    <data>
+        <record id="view_inherit_account_move_form" model="ir.ui.view">
+            <field name="name">inherit.account.move.form</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="priority">15</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='state']" position="replace">
+                    <field name="state" widget="statusbar" statusbar_visible="draft,posted,blocked,cancel"/>
+                </xpath>
+                <xpath expr="//button[@name='action_post']" position="replace">
+                    <button name="action_post" states="draft,blocked" string="Post" class="btn-primary" type="object" groups="account.group_account_invoice"/>
+                </xpath>
+                <xpath expr="//button[@name='button_cancel']" position="replace">
+                    <button name="button_cancel" string="Cancel Entry" type="object" groups="account.group_account_invoice"
+                                attrs="{'invisible' : ['|', ('id', '=', False), ('state', '!=', 'draft'),('state', '!=', 'blocked')]}"/>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_budget_wizard_form" model="ir.ui.view">
+            <field name="name">budget.wizard.form</field>
+            <field name="model">budget.wizard</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+            <form string="Budget Wizard limit">
+                <span> Budget Limit Exceeded</span>
+                <group>
+                    <group>
+                        <field name="message" />
+                        <field name="users_ids" widget="many2many_tags" options="{'no_create': True, 'no_create_edit':True}"/>
+                    </group>
+                </group>
+                <footer>
+		    	<button string="Notify" name="action_create_activity" type="object" class="oe_highlight"/>
+                </footer>
+            </form>
+            </field>
+        </record>
+        <record id="action_budget_wizard" model="ir.actions.act_window">
+            <field name="name">Budget Wizard</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">budget.wizard</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

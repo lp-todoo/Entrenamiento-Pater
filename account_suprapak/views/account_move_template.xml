@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data>
+        <template id="report_invoice_document_supra" inherit_id="account.report_invoice_document" priority="15">
+            <xpath expr="//address[@t-field='o.partner_id']" position="replace">
+                <t t-if="o.partner_id.parent_id and o.partner_id.parent_id.bool_parent">
+                    <address t-field="o.partner_id.parent_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' />
+                </t>
+                <t t-else="">
+                    <address t-field="o.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' />
+                </t>
+            </xpath>
+        </template>
+
+        <template id="report_invoice_document_inherit_sale_supra" inherit_id="sale.report_invoice_document_inherit_sale" priority="15">
+            <xpath expr="//div[3]" positon="replace">
+                <t t-if="o.partner_id.parent_id and o.partner_id.parent_id.bool_parent">
+                    <div t-field="o.partner_id.parent_id"
+                        t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' groups="sale.group_delivery_invoice_address"/>
+                </t>
+                <t t-else="">
+                    <div t-field="o.partner_id"
+                        t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' groups="sale.group_delivery_invoice_address"/>
+                </t>
+            </xpath>
+        </template>
+    </data>
+</odoo>

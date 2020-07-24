@@ -1,0 +1,30 @@
+<odoo>
+    <data>
+        <record id="account_asset_inherit_form" model="ir.ui.view">
+            <field name="name">account.asset.form.inherit.form</field>
+            <field name="model">account.asset</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="priority">17</field>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet[1]/div[not(@name)][1]" position="after">
+                    <group>
+                        <group name="Reference">
+                            <field name="plaque" attrs="{'readonly':[('state','!=','open')]}"/>
+                        </group>
+                        <group name="Photo">
+                            <field name="photo" widget="image"/>
+                        </group>
+                    </group>
+                </xpath>
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="stock_location_id" options="{'no_create': True, 'no_create_edit':True}"/>
+                </xpath>
+                <xpath expr="//sheet[1]/group[not(@name)][1]" position="after">
+                    <group name="Data">
+                        <field name="assigned_id"  options="{'no_create': True, 'no_create_edit':True}"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
