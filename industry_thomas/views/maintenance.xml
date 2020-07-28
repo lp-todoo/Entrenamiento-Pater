@@ -7,10 +7,8 @@
         <field name="arch" type="xml">
 
         <header>
-           <button name="button_finalizada" type="object" string="Finalizar" class="oe_highlight" invisible="True"/>
-            
-        </header> 
-             
+           <button name="button_finalizada" type="object" string="Finalizar" class="oe_highlight" invisible="True"/>            
+        </header>              
 
             <field name="maintenance_type" position="attributes" >
                 <attribute name="invisible">1</attribute>
@@ -36,7 +34,7 @@
                 <attribute name="required">1</attribute>
             </field>
 
-            <xpath expr="//field[(@name='employee_id')]" position="after">                
+            <xpath expr="//field[(@name='owner_user_id')]" position="after">                
                  <field name="service_order"/>
                  <field name="customer" required="True"/>
                  <field name="city"/>
@@ -49,7 +47,7 @@
                  <field name="total_days"/>
                  <field name="day" invisible="True"/>                                 
             </xpath>
-             <xpath expr="//field[(@name='equipment_id')]" position="after">
+            <xpath expr="//field[(@name='equipment_id')]" position="after">
                  <field name="serie" string="Serie del Equipo"/>
                  <field name="brand_machine"/>
                  <field name="model_machine"/>
@@ -57,7 +55,6 @@
                  <field name="type_of_maintenance" widget="radio" required="True"/>
                  <field name="task_id" readonly="True" invisible="True"/>                
             </xpath>
-
              <xpath expr="//field[(@name='email_cc')]" position="after">
                  <field name="type_request_maintenance" required="True"/>
                  <field name="attachment_id" readonly="True"/>
@@ -71,8 +68,7 @@
                       </a>
                     </bold>
                </div>
-             </xpath>
-            
+             </xpath>            
         </field>
     </record>
     <record id="seq_maintenance" model="ir.sequence">
