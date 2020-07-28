@@ -34,7 +34,7 @@
                 <attribute name="required">1</attribute>
             </field>
 
-            <xpath expr="//field[(@name='owner_user_id')]" position="after">                
+            <xpath expr="//field[(@name='employee_id')]" position="after">                
                  <field name="service_order"/>
                  <field name="customer" required="True"/>
                  <field name="city"/>
