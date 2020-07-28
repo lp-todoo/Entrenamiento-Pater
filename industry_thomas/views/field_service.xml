@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_field_service_form_inherit" model="ir.ui.view">
+        <field name="name">field.service.form.inherit</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="industry_fsm.project_task_view_form"/>
+        <field name="arch" type="xml">
+
+        <header>
+         <button type="object" string="CONFIRMAR COTIZACIÓN" class="oe_highlight" name="action_fsm_validate" confirm="Esta seguro que desea confirmar la  Cotización?" icon="fa-edit"  attrs="{'invisible': ['&amp;', '|',  ('allow_material', '=', True), '|', ('allow_timesheets', '=', True), ('allow_quotations', '=', False), '|', '|', '|', '|', '|', ('timesheet_timer_start', '!=', False), ('fsm_done', '=', True), '&amp;', ('allow_timesheets', '=', True), ('total_hours_spent', '=', 0), '&amp;', ('allow_material', '=', True), ('material_line_product_count', '=', 0), '&amp;', ('allow_timesheets', '=', False), ('allow_material', '=', False)]}" ></button>         
+         <button type="object" string="MARCAR COMO HECHO" class="oe_highlight" name="finally_maintenance_request" confirm="Desea colocar en estado finalizado la petición de mantenimiento?" icon="fa-check" invisible="True"/>
+         <button type="object" string="CANCELAR MANTENIMIENTO" class="btn btn-danger" name="cancel_field_service" confirm="Esta seguro que desea cancelar el Mantenimiento?" icon="fa-times-circle-o"/>         
+
+        </header>
+
+            <field name="name" position="attributes" >
+                <attribute name="required">0</attribute>
+            </field>
+
+            <field name="partner_id" position="attributes" >
+                <attribute name="readonly">1</attribute>
+            </field>
+
+            <field name="partner_phone" position="attributes" >
+                <attribute name="readonly">1</attribute>
+            </field>
+
+            <field name="partner_email" position="attributes" >
+                <attribute name="readonly">1</attribute>
+            </field>
+
+            <field name="user_id" position="attributes" >
+                <attribute name="readonly">1</attribute>
+            </field>
+
+            <field name="project_id" position="attributes" >
+                <attribute name="readonly">1</attribute>
+            </field>
+
+            <field name="planned_date_begin" position="attributes" >
+                <attribute name="readonly">1</attribute>
+            </field>       
+            
+            <xpath expr="//field[(@name='partner_id')]" position="after">               
+                <field name="phone" required="True"/>
+                <field name="customer_email" required="True"/>
+                <field name="spare_parts" required="True"/>
+                <field name="team_to_check" required="True" readonly="True"/>
+                <field name="serial" required="True"/>
+                <field name="brand" required="True"/>
+                <field name="model" required="True"/>
+                <field name="machine_location" required="True"/>
+                <field name="type_request" readonly="True"/>
+                <field name="type_service" required="True" widget="radio" readonly="True"/>                
+            </xpath>
+            <xpath expr="//field[(@name='user_id')]" position="after">
+                <field name="sign" widget="image"/>
+            </xpath>    
+            <sheet>
+             <notebook>
+               <page string="Hoja de Trabajo">
+                   <group>
+                       <group string="Información del Equipo">
+                           <field name="covers_and_chassis"/>
+                           <field name="feeding_systems"/>
+                           <field name="electronic_cards"/>
+                           <field name="electronic_settings"/>
+                           <field name="transportation_systems"/>
+                           <field name="electrical_wiring"/>
+                           <field name="engine_overhaul"/>
+                           <field name="valves_and_solenoids"/>
+                           <field name="accessories"/>
+                           <field name="mechanical_adjustments"/>
+                       </group>
+                       <group string="Reparación/Instalación/Mantenimiento">
+                           <field name="machine_ok"/>                           
+                           <field name="machine_change"/>
+                           <field name="requires_spare_parts"/>                           
+                       </group>
+                       <field name="description_maintenance" placeholder="Descripción del Mantenimiento" required="True"/>
+                       <field name="repair_setting" placeholder="Reparación" required="True"/>
+                       <field name="repair" placeholder="Justificación" required="True"/>
+                   </group>
+               </page>
+             </notebook>
+            </sheet>
+        </field>
+    </record>
+</odoo>         

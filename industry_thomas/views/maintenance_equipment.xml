@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_maintenance_equipment_inherit" model="ir.ui.view">
+        <field name="name">maintenance.equipment.form.inherit</field>
+        <field name="model">maintenance.equipment</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_view_form"/>
+        <field name="arch" type="xml">            
+            
+            <xpath expr="//div[(@class='oe_button_box')]" position="inside">
+                 <button string="Trazabilidad" type="object" name="action_view_stock_move_lines" class="oe_stat_button" icon="fa-exchange"/>
+            </xpath> 
+
+            <xpath expr="//field[(@name='model')]" position="after">
+                 <field name="brand_maintenance"/>
+                 <field name="inventory_plate"/>
+            </xpath>           
+
+            <xpath expr="//group[(@name='maintenance')]" position="after">
+                 <group>
+                   <field name="date_start_contract"/>
+                   <field name="date_end"/>
+                   <field name="maintenance_value"/>
+                   <field name="maintenance_cant"/>
+                   <field name="maintenance_total"/>
+                   <field name="maintenance_frequency"/>
+                   <field name="branch"/>
+                 </group>
+            </xpath>          
+             
+        </field>
+    </record>
+    <record model="ir.ui.view" id="view_maintenance_equipment_tree">
+       <field name="name">maintenance.equipment.inherit</field>
+       <field name="model">maintenance.equipment</field>
+       <field name="type">tree</field>
+       <field name="inherit_id" ref="maintenance.hr_equipment_view_tree"/>
+       <field name="arch" type="xml">
+             <xpath expr="//field[(@name='category_id')]" position="after">
+                   <field name="date_start_contract"/>
+                   <field name="date_end"/>
+                   <field name="maintenance_value"/>
+                   <field name="maintenance_cant"/>
+                   <field name="maintenance_total"/>
+                   <field name="maintenance_frequency"/>
+                   <field name="branch"/>
+            </xpath>
+       </field>
+    </record>
+</odoo>       

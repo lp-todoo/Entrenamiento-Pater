@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <template id="worksheet_inherit" inherit_id="industry_fsm_report.worksheet_custom_page">
+       <xpath expr="//div[(@class='align-top')]" position="after">
+           <p>prueba2020</p>
+       </xpath>      
+  </template>    
+</odoo>

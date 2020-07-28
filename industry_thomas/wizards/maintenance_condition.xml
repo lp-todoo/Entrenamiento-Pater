@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+   <record id="maintenance_condition_form" model="ir.ui.view">
+     <field name="name">Maintenance.Condition.form</field>
+     <field name="model">maintenance.condition</field>
+     <field name="arch" type="xml">
+        <form string="Petición de Mantenimiento">
+            <group class="oe_title">
+               <h3><p align="justify">Ya se encuentra creado un mantenimiento para los proximos 15 días</p></h3>
+               
+            </group>
+        </form>
+     </field>
+   </record>
+
+   <record id="maintenance_condition_wizard" model="ir.actions.act_window">
+      <field name="name">Petición de Mantenimiento</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">maintenance.condition</field>
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="maintenance_condition_form"/>
+      <field name="target">new</field>     
+   </record>
+</odoo>

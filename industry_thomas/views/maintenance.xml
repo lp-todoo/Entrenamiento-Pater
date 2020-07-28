@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_maintenance_request_inherit" model="ir.ui.view">
+        <field name="name">maintenance.request.form.inherit</field>
+        <field name="model">maintenance.request</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_request_view_form"/>
+        <field name="arch" type="xml">
+
+        <header>
+           <button name="button_finalizada" type="object" string="Finalizar" class="oe_highlight" invisible="True"/>
+           <button name="%(maintenance_condition_wizard)d" type="action" string="Pater"/> 
+        </header> 
+             
+
+            <field name="maintenance_type" position="attributes" >
+                <attribute name="invisible">1</attribute>
+            </field>
+
+            <field name="name" position="attributes" >
+                <attribute name="required">0</attribute>
+            </field>
+
+            <field name="name" position="attributes" >
+                <attribute name="readonly">1</attribute>
+            </field>
+
+            <field name="equipment_id" position="attributes" >
+                <attribute name="required">1</attribute>
+            </field>
+
+            <field name="user_id" position="attributes" >
+                <attribute name="required">1</attribute>
+            </field>
+
+            <field name="schedule_date" position="attributes" >
+                <attribute name="required">1</attribute>
+            </field>
+
+            <xpath expr="//field[(@name='employee_id')]" position="after">                
+                 <field name="service_order"/>
+                 <field name="customer" required="True"/>
+                 <field name="city"/>
+                 <field name="approver_name"/>
+                 <field name="approver_email"/>
+                 <field name="contract_code"/>
+                 <field name="end_date_contract"/>
+                 <field name="approver_type_contract"/>
+                 <field name="datetime_now" invisible="True"/> 
+                 <field name="total_days"/>
+                 <field name="day" invisible="True"/>                                 
+            </xpath>
+             <xpath expr="//field[(@name='equipment_id')]" position="after">
+                 <field name="serie" string="Serie del Equipo"/>
+                 <field name="brand_machine"/>
+                 <field name="model_machine"/>
+                 <field name="machine_location"/> 
+                 <field name="type_of_maintenance" widget="radio" required="True"/>
+                 <field name="task_id" readonly="True" invisible="True"/>                
+            </xpath>
+
+             <xpath expr="//field[(@name='email_cc')]" position="after">
+                 <field name="type_request_maintenance" required="True"/>
+                 <field name="attachment_id" readonly="True"/>
+             </xpath>
+             <xpath expr="//sheet" position="before">
+               <div class="alert alert-danger" role="alert" style="margin-bottom:2px;"  attrs="{'invisible': [('serie', '!=', '592959694'),('total_days','=',15)]}" >
+                   Ya existe un Mantenimiento para esta maquina para los proximos 15 días
+                   <bold>
+                      <a class="alert-link" role="button">
+                          <field name="serie" readonly="True"/>
+                      </a>
+                    </bold>
+               </div>
+             </xpath>
+            
+        </field>
+    </record>
+    <record id="seq_maintenance" model="ir.sequence">
+            <field name="name">Mantenimiento</field>
+            <field name="code">maintenance.request</field>
+            <field name="prefix"></field>
+            <field name="padding">8</field>
+            <field name="company_id" eval="False"/>
+    </record>
+    <record id="thomas_maintenance_request" model="ir.actions.act_window">
+        <field name="name">Maintenance Requests</field>
+        <field name="res_model">maintenance.request</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_id" ref="maintenance.hr_equipment_request_view_kanban"/>
+        <field name="context">{'default_user_id': uid}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Add a new maintenance request
+            </p><p>
+                Follow the process of the request and communicate with the collaborator.
+            </p>
+        </field>
+    </record>
+    
+</odoo>         
